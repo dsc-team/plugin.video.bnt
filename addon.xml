@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.video.bnt"
+version="0.0.1"
+name="Watch Bulgarian National TV (BNT) Archiives"
+provider-name="lyu">
+<requires>
+  <import addon="xbmc.python" version="2.24.0"/>
+  <import addon="script.module.beautifulsoup" version="3.0.8"/>
+</requires>
+<extension point="xbmc.python.pluginsource" library="main.py">
+  <provides>video</provides>
+</extension>
+<extension point="xbmc.addon.metadata">
+  <summary lang="en">BNT Archive Video Plugin</summary>
+  <description lang="en">BNT video plugin, a slow and dirty one. It scrapes the bnt.bg website. The encoding issues are inherited by the site, not my fault...</description>
+  <disclaimer lang="en">Use if you find it useful. That's an (ugly) result of my very first 3 hours of python coding</disclaimer>
+</extension>
+</addon>
