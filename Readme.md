@@ -13,12 +13,12 @@ Because of these loops and loops and loops it works slow.
 
 Unfortinately, from the location on the planet where I leave, it is tooooo slow to grab all the sub-content videos.
 
-Hence I've hardcoded a limit, to give up after the 4th subcategory. Otherwise, the kody kisy times out and terminates the search.
+Hence I've hardcoded a limit, to give up after the 4th subcategory. Otherwise, the kodi simply times out and terminates the search.
 
 ## Disclaimer
 I'm not a python guy, in fact this plugin is result of my very first 3 hours in python. It does the work for me.
 Please, fork the code and improve, if you can do it better, just don't criticize.
-IT works really slow here (the opposite end of the globe), but it does the job for me, so I don;t intend to improve it further.
+IT works really slow here (the opposite end of the globe), but it does the job for me, so I don't intend to improve it further.
 
 
 License: [GPL v.3](http://www.gnu.org/copyleft/gpl.html)
