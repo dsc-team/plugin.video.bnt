@@ -38,23 +38,23 @@ html = website.read()
 soup = BeautifulSoup(html)
 vsicki = soup.find('div',{"id":"vsichki-predavaniya"})
 vsickipred=[]
-
-for category in vsicki.find('div',{"class": "cat-wrapper"}):
-  if re.match('row w', category.get('class')):
-    for links in category.findAll('a'):
-      vsickipred=[]
-      link = {}
-      img = links.find('img', src=True)
-      if img:
- 
-        name = links.get('title').encode('utf-8')
-        link['thumb'] = img['src']
-        link['href'] =  links.get('href')
-        link['name']  = links.get('title')
-        link['genre']  = name
-        vsickipred.append(link)
-        VIDEOS.update({name: vsickipred})
-
+for category in vsicki.findAll('div'):
+  print category
+  print "----------------------"
+  if category.get('class'):
+    if re.match('row w', category.get('class')):
+      for links in category.findAll('a'):
+        vsickipred=[]
+        link = {}
+        img = links.find('img', src=True)
+        if img:
+          name = links.get('title').encode('utf-8')
+          link['thumb'] = img['src']
+          link['href'] =  links.get('href')
+          link['name']  = links.get('title')
+          link['genre']  = name
+          vsickipred.append(link)
+          VIDEOS.update({name: vsickipred})
 def get_categories():
     """
     Get the list of video categories.
@@ -103,8 +103,7 @@ def get_videos(category):
               internalsoup=BeautifulSoup(internalhtml)
               internallinks=internalsoup.find('div', {"class":"bnt_video_string"})
               link = {}
-              if internallinks.get('data-main-image-link'):
-        
+              if internallinks.get('data-main-video-link'):
                 thumb=internallinks.get('data-main-image-link')
                 video=internallinks.get('data-main-video-link')
                 xbmc.log("Found thumb " + thumb + "; Video at " + video)
