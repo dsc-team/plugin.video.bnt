@@ -20,5 +20,14 @@ I'm not a python guy, in fact this plugin is result of my very first 3 hours in 
 Please, fork the code and improve, if you can do it better, just don't criticize.
 IT works really slow here (the opposite end of the globe), but it does the job for me, so I don't intend to improve it further.
 
+## How to generate deployable plugin:
+If you are in the module dolder, assuming the folder is named `plugin.video.bnt`, run the following (Linux / Mac)
+
+```
+cd ..
+zip -r plugin.video.bnt.zip plugin.video.bnt -x *.git*
+
+```
+For windows, just zip the folder and provide to kodi.
 
 License: [GPL v.3](http://www.gnu.org/copyleft/gpl.html)
