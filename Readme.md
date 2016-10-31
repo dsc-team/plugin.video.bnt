@@ -21,7 +21,7 @@ Please, fork the code and improve, if you can do it better, just don't criticize
 IT works really slow here (the opposite end of the globe), but it does the job for me, so I don't intend to improve it further.
 
 ## How to generate deployable plugin:
-If you are in the module dolder, assuming the folder is named `plugin.video.bnt`, run the following (Linux / Mac)
+If you are in the module folder, assuming the folder is named `plugin.video.bnt`, run the following (Linux / Mac)
 
 ```
 cd ..
