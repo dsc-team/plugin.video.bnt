@@ -8,7 +8,7 @@ import sys
 
 reload(sys)
 sys.setdefaultencoding('utf8')
-
+from dateutil.parser import parse
 from urlparse import parse_qsl
 import xbmcgui
 import xbmcplugin
@@ -98,28 +98,33 @@ def get_videos(category):
             if img:
               name = links.get('title')
               internalurl=links.get('href')
-              internalwebsite = urllib2.urlopen(internalurl)
-              internalhtml=internalwebsite.read()
-              internalsoup=BeautifulSoup(internalhtml)
-              internallinks=internalsoup.find('div', {"class":"bnt_video_string"})
               link = {}
-              if internallinks.get('data-main-video-link'):
-                thumb=internallinks.get('data-main-image-link')
-                video=internallinks.get('data-main-video-link')
-                xbmc.log("Found thumb " + thumb + "; Video at " + video)
-                link['thumb'] = thumb
-                link['video'] = video
-                link['name']  = name
-                link['genre']  = name
-                vsickipred.append(link)
-                i += 1
-                if i > 3:
-                  break
-                  #have to stop it early as kodi times out waithing ... TODO
+              lat = internalurl.split('/')[-1]
+              #little fun trying to extract date of air (veterani-majstori-13-07-2016)
+              da = lat.split('-')
+              if len(da) > 2:
+                date = da[-1] + "-" + da[-2] + "-" + da[-3]
+                try:
+                  parse(date)
+                  xbmc.log("Date detected! " + date)
+                  l=" "
+                  for x in xrange(0,len(da)-3):
+                    l=l+da[x]+" "
+                  link['name']  = "[" + date + "] " + l
+                except ValueError:
+                  link['name']  = lat
+              else:
+                link['name']  = lat
+              xbmc.log("Extracted lat category: " + lat)
+              link['video'] = internalurl
+              link['genre'] = name
+              link['thumb'] = name
+              vsickipred.append(link)
     xbmc.log("End scrapping Found:")
     for vids in vsickipred:
       xbmc.log(vids['video'])
     return vsickipred
+
 
 
 def list_categories():
@@ -211,7 +216,13 @@ def play_video(path):
     :param path: str
     """
     # Create a playable item with a path to play.
-    play_item = xbmcgui.ListItem(path=path)
+    internalwebsite = urllib2.urlopen(path)
+    internalhtml=internalwebsite.read()
+    internalsoup=BeautifulSoup(internalhtml)
+    internallinks=internalsoup.find('div', {"class":"bnt_video_string"})
+    # Create a playable item with a path to play.
+    video=internallinks.get('data-main-video-link')
+    play_item = xbmcgui.ListItem(path=video) 
     # Pass the item to the Kodi player.
     xbmcplugin.setResolvedUrl(_handle, True, listitem=play_item)
 
